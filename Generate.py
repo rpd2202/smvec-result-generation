@@ -1,11 +1,16 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 import time
 import openpyxl
 
 driver = webdriver.Chrome()
-driver.get("https://exam.smvec.ac.in/exam_result_ug_pg_aug_sep_2023/")
-time.sleep(3)
+url = "http://exam.smvec.ac.in/exam_result_ug_regular_mayjune_2024/"
+driver.get(url)
+time.sleep(5)
+
+
+
 
 def read_captcha():
     captcha =  driver.find_element("xpath","/html/body/div[3]/div[1]/div/div/div[2]/div[2]/div[2]/div/div/div/div/form/div[3]/div/span[1]")
@@ -49,7 +54,7 @@ def read_result():
 
 
 
-workbook = openpyxl.load_workbook('21-25 IT A.xlsx')
+workbook = openpyxl.load_workbook('21-25 IT C.xlsx')
 worksheet = workbook.active
 
 idx=2
@@ -86,5 +91,5 @@ while num_rows>=idx:
     time.sleep(0.5)
         
 
-workbook.save("21-25 IT A Results.xlsx")
+workbook.save("Results/21-25 IT C Results.xlsx")
 driver.close()

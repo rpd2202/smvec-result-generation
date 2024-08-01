@@ -11,10 +11,9 @@ from PIL import Image
 driver = webdriver.Chrome()
 driver.maximize_window()
 
-driver.get("https://exam.smvec.ac.in/exam_result_ug_pg_aug_sep_2023/")
-time.sleep(3)
+driver.get("http://exam.smvec.ac.in/exam_result_ug_regular_mayjune_2024/")
+time.sleep(5)
 doc = Document()
-
 
 def read_captcha():
     captcha =  driver.find_element("xpath","/html/body/div[3]/div[1]/div/div/div[2]/div[2]/div[2]/div/div/div/div/form/div[3]/div/span[1]")
@@ -65,7 +64,7 @@ def get_screenshot():
     target_element.screenshot('temp.png')
     print("Cropping Image")
     crop = Image.open('temp.png')
-    cropped_image = crop.crop((485, 78, 1040, 548))
+    cropped_image = crop.crop((678, 219, 678+554, 219+554))
     cropped_image.save('temp.png')
     crop.close()
     driver.execute_script("document.body.style.zoom='100%'")
@@ -76,7 +75,7 @@ def get_document(name,regno,dob):
     img_path = "temp.png"
     doc.add_picture(img_path, width=Inches(4.0))  
     
-workbook = openpyxl.load_workbook('21-25 IT A.xlsx')
+workbook = openpyxl.load_workbook('21-25 IT C.xlsx')
 worksheet = workbook.active
 
 idx=2
@@ -118,5 +117,5 @@ while num_rows>=idx:
 
 print(idx)
 
-doc.save('21-25 IT A Results.docx')
+doc.save('Results/21-25 IT C Results.docx')
 driver.close()
